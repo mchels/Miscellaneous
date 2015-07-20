@@ -1,16 +1,18 @@
-;##############
-;### WINAMP ###
+; Global hotkeys for winamp
 ; http://www.autohotkey.com/docs/misc/Winamp.htm
 ; http://www.autohotkey.com/forum/topic155.html
+; Full ref of winamp key codes:
 ; http://www.autohotkey.com/forum/topic126.html
-; Ctrl+Alt+Z/X/C/V/B/Up/Down/Left/Right = Control Winamp
-^!z::
-IfWinNotExist ahk_class Winamp v1.x
-  return
-; Otherwise, the above has set the "last found" window for use below.
-;ControlSend, ahk_parent, z  ; Previous Track
-PostMessage, 0x111, 40044, , ,ahk_class Winamp v1.x  ; Previous Track
-return
+
+
+DetectHiddenText, On
+DetectHiddenWindows, On
+#IfWinExists ahk_class Winamp v1.x
+    ^!z::
+        ; SendMessage, 0x111, 40046, , ,ahk_class Winamp v1.x
+        ControlSend, ahk_parent, c
+        return
+
 
 ^!x::
 IfWinNotExist ahk_class Winamp v1.x
