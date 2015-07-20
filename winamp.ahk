@@ -1,12 +1,20 @@
 ; Global hotkeys for winamp
 ; http://www.autohotkey.com/docs/misc/Winamp.htm
-; http://www.autohotkey.com/forum/topic155.html
 ; Full ref of winamp key codes:
 ; http://www.autohotkey.com/forum/topic126.html
 
+; Hotkeys have the structure
+;   <modifiers and keys>::
+        ; SendMessage <something>
+        ; ControlSend <something different>
+        ; return
+; The SendMessage line sends the key code (e.g., 40046  to winamp).
+; The ControlSend line sends a literal keypress (e.g., c to winamp).
+; I've included both here if one of them breaks at some point.
 
 DetectHiddenText, On
 DetectHiddenWindows, On
+
 #IfWinExists ahk_class Winamp v1.x
     ^!z::
         ; SendMessage, 0x111, 40046, , ,ahk_class Winamp v1.x
