@@ -91,24 +91,10 @@ DetectHiddenWindows, On
         {
             ; Alt-m is hotkey for minimize inside Winamp.
             Send !m
-            ; The commands below do not work for one reason or another.
-            ; ; ControlSend, ahk_parent, !m
-            ; ControlSendRaw, ahk_parent, {Alt down}m{Alt up}
-            ; WinHide ahk_class BaseWindow_RootWnd
-            ; WinMinimize
-            ; WinMinimize Winamp
-            ; WinHide Winamp
-            ; PostMessage, 0x112, 0xF020,,, Winamp, ; 0x112 = WM_SYSCOMMAND, 0xF020 = SC_MINIMIZE
         }
         else
         {
             WinActivate, ahk_class Winamp v1.x
-            ; The commands below do not work for one reason or another.
-            ; WinActivate winamp_ID
-            ; WinActivate ahk_parent
-            ; WinActivate Winamp
-            ; WinActivate ahk_exe winamp.exe
-            ; WinShow ahk_exe winamp.exe
         }
         return
 #IfWinExists
