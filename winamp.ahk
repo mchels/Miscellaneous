@@ -12,8 +12,7 @@
 ; The ControlSend line sends a literal keypress (e.g., c to winamp).
 ; I've included both here if one of them breaks at some point.
 
-#WinActivateForce
-
+; Required to match winamp windows with the partial string "winamp".
 SetTitleMatchMode 2
 
 DetectHiddenText, On
@@ -33,6 +32,10 @@ DetectHiddenWindows, On
         {
             ; Winamp is stopped. Do 40045: Play.
             SendMessage, 0x111,40045,,,ahk_class Winamp v1.x
+        }
+        else
+        {
+            Msgbox, errorlevel=%errorlevel% not recognized
         }
         return
 
@@ -82,23 +85,24 @@ DetectHiddenWindows, On
         ; ControlSend, ahk_parent, {left}
         return
 
-    ; ; Toggle main window visible, win-½
-    ; #½::
-        ; IfWinActive, Winamp
-        ; {
-            ; ; WinHide ahk_class BaseWindow_RootWnd
-            ; ; WinMinimize
-            ; ; WinMinimize Winamp
-            ; ; WinHide Winamp
-            ; ; PostMessage, 0x112, 0xF020,,, Winamp, ; 0x112 = WM_SYSCOMMAND, 0xF020 = SC_MINIMIZE
-        ; }
-        ; else
-        ; {
-            ; WinActivate Winamp
-        ; }
-        ; ; WinActivate, ahk_parent
-        ; ; WinShow, ahk_parent
-        ; ; SendMessage, 0x111, 40258, , ,ahk_class Winamp v1.x
-        ; ; Doesn't exist as literal key.
-        ; ; ControlSend, ahk_parent, v
-        ; return
+    ; Toggle main window visible, win-½
+    #½::
+        IfWinActive, Winamp, Winamp
+        {
+            ; Alt-m is hotkey for minimize inside Winamp.
+            Send !m
+            ; The commands below do not work for one reason or another.
+            ; ; ControlSend, ahk_parent, !m
+            ; ControlSendRaw, ahk_parent, {Alt down}m{Alt up}
+            ; WinHide ahk_class BaseWindow_RootWnd
+            ; WinMinimize
+            ; WinMinimize Winamp
+            ; WinHide Winamp
+            ; PostMessage, 0x112, 0xF020,,, Winamp, ; 0x112 = WM_SYSCOMMAND, 0xF020 = SC_MINIMIZE
+        }
+        else
+        {
+            WinActivate Winamp
+        }
+        return
+#IfWinExists
