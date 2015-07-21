@@ -87,7 +87,7 @@ DetectHiddenWindows, On
 
     ; Toggle main window visible, win-½
     #½::
-        IfWinActive, Winamp, Winamp
+        If WinActive("ahk_exe winamp.exe")
         {
             ; Alt-m is hotkey for minimize inside Winamp.
             Send !m
@@ -102,7 +102,13 @@ DetectHiddenWindows, On
         }
         else
         {
-            WinActivate Winamp
+            WinActivate, ahk_class Winamp v1.x
+            ; The commands below do not work for one reason or another.
+            ; WinActivate winamp_ID
+            ; WinActivate ahk_parent
+            ; WinActivate Winamp
+            ; WinActivate ahk_exe winamp.exe
+            ; WinShow ahk_exe winamp.exe
         }
         return
 #IfWinExists
