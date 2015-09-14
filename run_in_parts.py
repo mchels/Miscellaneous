@@ -1,5 +1,6 @@
 import sys
 import imp
+import traceback
 
 assert len(sys.argv)==2
 
@@ -14,7 +15,10 @@ if __name__=='__main__':
     while True:
         if not part1Cache:
             part1Cache = module_to_run.part1()
-        module_to_run.part2(part1Cache)
+        try:
+            module_to_run.part2(part1Cache)
+        except:
+            traceback.print_exc()
         print("Press enter to re-run the script, CTRL-C to exit")
         sys.stdin.readline()
         imp.reload(module_to_run)
