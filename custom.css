@@ -184,3 +184,16 @@ div.input_area { /* box around box with code */
     padding-bottom: 0.5ex;
     padding-left: 0.5em;
 }
+
+/* Add vertical line in the margin of text boxes to set them apart
+from code cells. */
+div.text_cell{
+    margin-top:-2px;
+    margin-bottom:-2px;
+    padding-top:2px;
+    padding-bottom:2px;
+    border-left:2px solid #505050;
+    border-collapse:collapse;
+    border-top:none;
+    border-bottom:none;
+}
